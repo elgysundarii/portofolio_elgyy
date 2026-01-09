@@ -1,115 +1,79 @@
 "use client";
 
-import { useState } from "react";
 import ScrollAnimate from "@/components/ScrollAnimate";
 
 export default function Contact() {
-    const [form, setForm] = useState({ name: "", email: "", message: "" });
-    const [focused, setFocused] = useState("");
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        window.location.href = `mailto:elgysundariii@gmail.com?subject=Portfolio - ${form.name}&body=${form.message}`;
-    };
-
     const contacts = [
-        { icon: "📧", label: "Email", value: "elgysundariii@gmail.com", href: "mailto:elgysundariii@gmail.com" },
-        { icon: "📱", label: "Phone", value: "+62 831-3773-5798", href: "tel:+6283137735798" },
-        { icon: "💼", label: "LinkedIn", value: "Elgy Sundari", href: "https://linkedin.com" },
+        { label: "Email", value: "elgysundariii@gmail.com", href: "mailto:elgysundariii@gmail.com" },
+        { label: "Phone", value: "+62 831-3773-5798", href: "tel:+6283137735798" },
+        { label: "LinkedIn", value: "Elgy Sundari", href: "https://linkedin.com" },
+    ];
+
+    const socials = [
+        { icon: "GH", label: "GitHub", color: "#1e3a5f" },
+        { icon: "in", label: "LinkedIn", color: "#e91e8c" },
+        { icon: "IG", label: "Instagram", color: "#1e3a5f" }
     ];
 
     return (
-        <section id="contact" style={{ padding: "120px 50px", maxWidth: "1400px", margin: "0 auto", position: "relative" }}>
+        <section id="contact" style={{ padding: "120px 60px", position: "relative", background: "#fff" }}>
+            
+            {/* Decorative */}
+            <div style={{ position: "absolute", top: "20%", right: "-5%", width: "300px", height: "300px", border: "40px solid rgba(30, 58, 95, 0.05)", borderRadius: "50%" }} />
+            <div style={{ position: "absolute", bottom: "15%", left: "-3%", width: "150px", height: "150px", border: "25px solid rgba(233, 30, 140, 0.08)", borderRadius: "50%" }} />
 
-            {/* Background accents */}
-            <div style={{ position: "absolute", top: "20%", left: "-10%", width: "400px", height: "400px", background: "radial-gradient(circle, rgba(13, 148, 136, 0.1) 0%, transparent 70%)", filter: "blur(80px)", zIndex: 0 }} />
-            <div style={{ position: "absolute", bottom: "10%", right: "-10%", width: "300px", height: "300px", background: "radial-gradient(circle, rgba(236, 72, 153, 0.08) 0%, transparent 70%)", filter: "blur(60px)", zIndex: 0 }} />
-
-            <div style={{ position: "relative", zIndex: 1 }}>
+            <div style={{ maxWidth: "800px", margin: "0 auto", position: "relative", zIndex: 1 }}>
+                
                 {/* Header */}
                 <ScrollAnimate animation="fadeUp">
                     <div style={{ textAlign: "center", marginBottom: "60px" }}>
-                        <span style={{ color: "#14b8a6", fontSize: "0.9rem", fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase" }}>Contact</span>
-                        <h2 style={{ fontSize: "clamp(2.2rem, 4vw, 3rem)", fontWeight: 800, marginTop: "16px" }}>
-                            Let's <span style={{ background: "linear-gradient(90deg, #14b8a6, #ec4899)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Connect</span>
+                        <span style={{ display: "inline-block", padding: "10px 24px", background: "#1e3a5f", color: "#fff", borderRadius: "50px", fontSize: "0.9rem", fontWeight: 500, marginBottom: "20px" }}>
+                            Get in Touch
+                        </span>
+                        <h2 style={{ fontFamily: "'Quicksand', sans-serif", fontSize: "clamp(2.5rem, 5vw, 3.5rem)", fontWeight: 700, color: "#1e3a5f", lineHeight: 1.2, marginBottom: "16px" }}>
+                            Let&apos;s Work Together
                         </h2>
-                        <p style={{ color: "rgba(248, 250, 252, 0.6)", fontSize: "1.1rem", marginTop: "16px", maxWidth: "500px", margin: "16px auto 0" }}>
-                            Have a project in mind? Let's create something amazing together!
+                        <p style={{ color: "#5a6a7a", fontSize: "1.1rem", maxWidth: "500px", margin: "0 auto" }}>
+                            Have a project in mind? I&apos;d love to hear from you.
                         </p>
                     </div>
                 </ScrollAnimate>
 
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "60px" }} className="contact-grid">
-                    {/* Left - Contact info */}
-                    <div>
-                        <ScrollAnimate animation="fadeLeft">
-                            <h3 style={{ fontSize: "1.3rem", fontWeight: 700, marginBottom: "24px" }}>Get in Touch</h3>
+                {/* Contact cards */}
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px", marginBottom: "50px" }} className="contact-grid">
+                    {contacts.map((c, i) => (
+                        <ScrollAnimate key={i} animation="fadeUp" delay={i * 0.1}>
+                            <a href={c.href} target="_blank" style={{ display: "block", padding: "28px 24px", background: "#f8f9fa", borderRadius: "20px", textAlign: "center", transition: "all 0.3s", textDecoration: "none", border: "2px solid transparent" }}
+                                onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#e91e8c"; e.currentTarget.style.transform = "translateY(-8px)"; e.currentTarget.style.boxShadow = "0 15px 40px rgba(233, 30, 140, 0.15)"; }}
+                                onMouseLeave={(e) => { e.currentTarget.style.borderColor = "transparent"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
+                                <p style={{ color: "#5a6a7a", fontSize: "0.85rem", marginBottom: "8px" }}>{c.label}</p>
+                                <p style={{ color: "#1e3a5f", fontWeight: 600, fontSize: "1rem" }}>{c.value}</p>
+                            </a>
                         </ScrollAnimate>
-
-                        {contacts.map((c, i) => (
-                            <ScrollAnimate key={i} animation="fadeLeft" delay={0.1 + i * 0.1}>
-                                <a href={c.href} target="_blank" style={{ display: "flex", alignItems: "center", gap: "16px", padding: "20px", background: "rgba(13, 148, 136, 0.05)", border: "1px solid rgba(13, 148, 136, 0.1)", borderRadius: "16px", marginBottom: "12px", transition: "all 0.3s", textDecoration: "none" }}
-                                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#14b8a6"; e.currentTarget.style.transform = "translateX(8px)"; }}
-                                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(13, 148, 136, 0.1)"; e.currentTarget.style.transform = "translateX(0)"; }}>
-                                    <span style={{ fontSize: "1.5rem" }}>{c.icon}</span>
-                                    <div>
-                                        <p style={{ color: "rgba(248, 250, 252, 0.5)", fontSize: "0.85rem" }}>{c.label}</p>
-                                        <p style={{ color: "#f8fafc", fontWeight: 500 }}>{c.value}</p>
-                                    </div>
-                                </a>
-                            </ScrollAnimate>
-                        ))}
-
-                        {/* Social links */}
-                        <ScrollAnimate animation="fadeLeft" delay={0.4}>
-                            <div style={{ marginTop: "32px" }}>
-                                <p style={{ color: "rgba(248, 250, 252, 0.5)", fontSize: "0.9rem", marginBottom: "16px" }}>Follow me</p>
-                                <div style={{ display: "flex", gap: "12px" }}>
-                                    {["GitHub", "LinkedIn", "Instagram"].map((s, i) => (
-                                        <a key={i} href="#" style={{ padding: "12px 20px", background: "rgba(13, 148, 136, 0.1)", border: "1px solid rgba(13, 148, 136, 0.2)", borderRadius: "12px", fontSize: "0.85rem", color: "#f8fafc", transition: "all 0.3s" }}
-                                            onMouseEnter={(e) => { e.currentTarget.style.background = i % 2 === 0 ? "#14b8a6" : "#ec4899"; e.currentTarget.style.borderColor = "transparent"; }}
-                                            onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(13, 148, 136, 0.1)"; e.currentTarget.style.borderColor = "rgba(13, 148, 136, 0.2)"; }}>
-                                            {s}
-                                        </a>
-                                    ))}
-                                </div>
-                            </div>
-                        </ScrollAnimate>
-                    </div>
-
-                    {/* Right - Form */}
-                    <ScrollAnimate animation="fadeRight" delay={0.2}>
-                        <form onSubmit={handleSubmit} style={{ background: "rgba(13, 148, 136, 0.05)", border: "1px solid rgba(13, 148, 136, 0.1)", borderRadius: "24px", padding: "40px" }}>
-                            {["name", "email"].map((field) => (
-                                <div key={field} style={{ marginBottom: "20px" }}>
-                                    <label style={{ display: "block", color: focused === field ? "#14b8a6" : "rgba(248, 250, 252, 0.6)", fontSize: "0.9rem", marginBottom: "8px", transition: "color 0.3s", textTransform: "capitalize" }}>{field}</label>
-                                    <input type={field === "email" ? "email" : "text"} required value={form[field as keyof typeof form]}
-                                        onChange={(e) => setForm({ ...form, [field]: e.target.value })}
-                                        onFocus={() => setFocused(field)} onBlur={() => setFocused("")}
-                                        style={{ width: "100%", padding: "16px", background: "rgba(7, 26, 31, 0.6)", border: `2px solid ${focused === field ? "#14b8a6" : "rgba(13, 148, 136, 0.2)"}`, borderRadius: "12px", color: "#f8fafc", fontSize: "1rem", outline: "none", transition: "all 0.3s" }} />
-                                </div>
-                            ))}
-                            <div style={{ marginBottom: "24px" }}>
-                                <label style={{ display: "block", color: focused === "message" ? "#14b8a6" : "rgba(248, 250, 252, 0.6)", fontSize: "0.9rem", marginBottom: "8px", transition: "color 0.3s" }}>Message</label>
-                                <textarea required rows={4} value={form.message}
-                                    onChange={(e) => setForm({ ...form, message: e.target.value })}
-                                    onFocus={() => setFocused("message")} onBlur={() => setFocused("")}
-                                    style={{ width: "100%", padding: "16px", background: "rgba(7, 26, 31, 0.6)", border: `2px solid ${focused === "message" ? "#14b8a6" : "rgba(13, 148, 136, 0.2)"}`, borderRadius: "12px", color: "#f8fafc", fontSize: "1rem", outline: "none", resize: "vertical", transition: "all 0.3s" }} />
-                            </div>
-                            <button type="submit" style={{ width: "100%", padding: "18px", background: "linear-gradient(135deg, #0d9488, #14b8a6)", border: "none", borderRadius: "12px", color: "#071a1f", fontSize: "1rem", fontWeight: 700, cursor: "pointer", transition: "all 0.3s" }}
-                                onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 10px 30px rgba(13, 148, 136, 0.4)"; }}
-                                onMouseLeave={(e) => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
-                                Send Message →
-                            </button>
-                        </form>
-                    </ScrollAnimate>
+                    ))}
                 </div>
 
+                {/* Socials */}
+                <ScrollAnimate animation="fadeUp" delay={0.3}>
+                    <div style={{ textAlign: "center" }}>
+                        <p style={{ color: "#5a6a7a", fontSize: "0.9rem", marginBottom: "20px" }}>Follow me</p>
+                        <div style={{ display: "flex", gap: "14px", justifyContent: "center" }}>
+                            {socials.map((s, i) => (
+                                <a key={i} href="#" style={{ width: "56px", height: "56px", display: "flex", alignItems: "center", justifyContent: "center", background: "#f8f9fa", border: "2px solid transparent", borderRadius: "16px", color: "#1e3a5f", fontSize: "1rem", fontWeight: 600, transition: "all 0.3s" }}
+                                    onMouseEnter={(e) => { e.currentTarget.style.background = s.color; e.currentTarget.style.color = "#fff"; e.currentTarget.style.transform = "translateY(-4px)"; }}
+                                    onMouseLeave={(e) => { e.currentTarget.style.background = "#f8f9fa"; e.currentTarget.style.color = "#1e3a5f"; e.currentTarget.style.transform = "translateY(0)"; }}>
+                                    {s.icon}
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                </ScrollAnimate>
+
                 {/* Footer */}
-                <ScrollAnimate animation="fadeIn" delay={0.5}>
-                    <div style={{ textAlign: "center", marginTop: "80px", paddingTop: "40px", borderTop: "1px solid rgba(13, 148, 136, 0.1)" }}>
-                        <p style={{ color: "rgba(248, 250, 252, 0.5)", fontSize: "0.9rem" }}>
-                            © 2025 Elgy Sundari. Built with <span style={{ color: "#ec4899" }}>♥</span> and lots of coffee ☕
+                <ScrollAnimate animation="fadeIn" delay={0.4}>
+                    <div style={{ textAlign: "center", marginTop: "80px", paddingTop: "40px", borderTop: "1px solid #e5e7eb" }}>
+                        <p style={{ color: "#5a6a7a", fontSize: "0.9rem" }}>
+                            © 2025 Elgy Sundari. All rights reserved.
                         </p>
                     </div>
                 </ScrollAnimate>

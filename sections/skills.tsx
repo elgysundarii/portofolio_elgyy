@@ -2,57 +2,66 @@
 
 import ScrollAnimate from "@/components/ScrollAnimate";
 
-const ToolIcon = ({ name, color }: { name: string; color: string }) => (
-    <div style={{ padding: "14px 20px", background: "rgba(13, 148, 136, 0.08)", border: "1px solid rgba(13, 148, 136, 0.15)", borderRadius: "12px", fontSize: "0.85rem", fontWeight: 500, color: "rgba(248, 250, 252, 0.9)", transition: "all 0.3s", cursor: "default" }}
-        onMouseEnter={(e) => { e.currentTarget.style.borderColor = color; e.currentTarget.style.background = `${color}15`; e.currentTarget.style.transform = "translateY(-3px)"; }}
-        onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(13, 148, 136, 0.15)"; e.currentTarget.style.background = "rgba(13, 148, 136, 0.08)"; e.currentTarget.style.transform = "translateY(0)"; }}>
-        {name}
-    </div>
-);
+const tools = [
+    { name: "Figma", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
+    { name: "VS Code", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" },
+    { name: "Git", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
+    { name: "GitHub", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
+    { name: "Python", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+    { name: "MySQL", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
+    { name: "HTML5", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
+    { name: "CSS3", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
+    { name: "Jira", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" },
+    { name: "Notion", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/notion/notion-original.svg" },
+    { name: "Canva", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg" },
+    { name: "Docker", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
+    { name: "Postman", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" },
+    { name: "ClickUp", logo: "" },
+    { name: "Apidog", logo: "" },
+];
+
+const skills = [
+    { title: "Design", color: "#e91e8c", items: ["UI Design", "UX Research", "Prototyping", "Wireframing", "Design Systems"] },
+    { title: "Development", color: "#fff", items: ["HTML/CSS", "Python", "JavaScript", "C++", "SQL"] },
+    { title: "QA & Testing", color: "#e91e8c", items: ["Manual Testing", "Test Planning", "Bug Tracking", "API Testing", "Documentation"] },
+];
 
 export default function Skills() {
-    const categories = [
-        { title: "Design", icon: "🎨", color: "#ec4899", skills: ["Figma", "UI Design", "Prototyping", "Wireframing"] },
-        { title: "Development", icon: "💻", color: "#14b8a6", skills: ["HTML/CSS", "Python", "C++", "JavaScript"] },
-        { title: "QA & Testing", icon: "🔍", color: "#fbbf24", skills: ["Manual Testing", "Test Planning", "Bug Reporting", "Documentation"] },
-    ];
-
-    const tools = ["Figma", "VS Code", "Git", "GitHub", "Jira", "Python", "MySQL", "HTML", "CSS"];
-
     return (
-        <section id="skills" style={{ padding: "120px 50px", maxWidth: "1400px", margin: "0 auto", position: "relative" }}>
+        <section id="skills" style={{ padding: "120px 60px", position: "relative", background: "#1e3a5f" }}>
+            
+            {/* Decorative */}
+            <div style={{ position: "absolute", top: "20%", right: "5%", width: "200px", height: "200px", border: "30px solid rgba(255,255,255,0.05)", borderRadius: "50%" }} />
+            <div style={{ position: "absolute", bottom: "15%", left: "8%", width: "120px", height: "120px", border: "20px solid rgba(233, 30, 140, 0.1)", borderRadius: "50%" }} />
 
-            {/* Background accent */}
-            <div style={{ position: "absolute", top: "30%", left: "-15%", width: "400px", height: "400px", background: "radial-gradient(circle, rgba(13, 148, 136, 0.1) 0%, transparent 70%)", filter: "blur(80px)", zIndex: 0 }} />
-
-            <div style={{ position: "relative", zIndex: 1 }}>
+            <div style={{ maxWidth: "1200px", margin: "0 auto", position: "relative", zIndex: 1 }}>
+                
                 {/* Header */}
                 <ScrollAnimate animation="fadeUp">
-                    <div style={{ textAlign: "center", marginBottom: "60px" }}>
-                        <span style={{ color: "#14b8a6", fontSize: "0.9rem", fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase" }}>Skills</span>
-                        <h2 style={{ fontSize: "clamp(2.2rem, 4vw, 3rem)", fontWeight: 800, marginTop: "16px" }}>
-                            What I <span style={{ background: "linear-gradient(90deg, #14b8a6, #ec4899)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>bring</span>
+                    <div style={{ marginBottom: "60px" }}>
+                        <span style={{ display: "inline-block", padding: "10px 24px", background: "#e91e8c", color: "#fff", borderRadius: "50px", fontSize: "0.9rem", fontWeight: 600, marginBottom: "20px" }}>
+                            Skills & Tools
+                        </span>
+                        <h2 style={{ fontFamily: "'Quicksand', sans-serif", fontSize: "clamp(2.5rem, 5vw, 3.5rem)", fontWeight: 700, color: "#fff", lineHeight: 1.2 }}>
+                            What I Do Best
                         </h2>
                     </div>
                 </ScrollAnimate>
 
-                {/* Skill categories */}
+                {/* Skills grid */}
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px", marginBottom: "60px" }} className="skills-grid">
-                    {categories.map((cat, i) => (
+                    {skills.map((skill, i) => (
                         <ScrollAnimate key={i} animation="fadeUp" delay={i * 0.1}>
-                            <div style={{ background: "rgba(13, 148, 136, 0.05)", border: "1px solid rgba(13, 148, 136, 0.15)", borderRadius: "24px", padding: "32px", transition: "all 0.4s", height: "100%" }}
-                                onMouseEnter={(e) => { e.currentTarget.style.borderColor = cat.color; e.currentTarget.style.transform = "translateY(-8px)"; }}
-                                onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(13, 148, 136, 0.15)"; e.currentTarget.style.transform = "translateY(0)"; }}>
-
-                                <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "24px" }}>
-                                    <span style={{ fontSize: "2rem" }}>{cat.icon}</span>
-                                    <h3 style={{ fontSize: "1.3rem", fontWeight: 700 }}>{cat.title}</h3>
-                                </div>
-
-                                <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
-                                    {cat.skills.map((skill, j) => (
-                                        <span key={j} style={{ padding: "8px 16px", background: `${cat.color}15`, border: `1px solid ${cat.color}30`, borderRadius: "20px", fontSize: "0.85rem", color: cat.color, fontWeight: 500 }}>
-                                            {skill}
+                            <div style={{ background: "rgba(255,255,255,0.05)", borderRadius: "24px", padding: "32px", border: "1px solid rgba(255,255,255,0.1)", transition: "all 0.3s" }}
+                                onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.1)"; e.currentTarget.style.transform = "translateY(-5px)"; }}
+                                onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.05)"; e.currentTarget.style.transform = "translateY(0)"; }}>
+                                
+                                <h3 style={{ fontFamily: "'Quicksand', sans-serif", fontSize: "1.5rem", fontWeight: 700, color: "#fff", marginBottom: "20px" }}>{skill.title}</h3>
+                                
+                                <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+                                    {skill.items.map((item, j) => (
+                                        <span key={j} style={{ padding: "8px 16px", background: skill.color === "#e91e8c" ? "rgba(233, 30, 140, 0.2)" : "rgba(255,255,255,0.1)", borderRadius: "50px", fontSize: "0.85rem", color: skill.color, fontWeight: 500 }}>
+                                            {item}
                                         </span>
                                     ))}
                                 </div>
@@ -63,18 +72,29 @@ export default function Skills() {
 
                 {/* Tools */}
                 <ScrollAnimate animation="fadeUp" delay={0.3}>
-                    <div style={{ background: "rgba(13, 148, 136, 0.05)", border: "1px solid rgba(13, 148, 136, 0.1)", borderRadius: "24px", padding: "40px", textAlign: "center" }}>
-                        <h3 style={{ fontSize: "1.2rem", fontWeight: 600, marginBottom: "24px" }}>Tools I Use</h3>
-                        <div style={{ display: "flex", flexWrap: "wrap", gap: "12px", justifyContent: "center" }}>
+                    <div style={{ background: "rgba(255,255,255,0.05)", borderRadius: "24px", padding: "40px", border: "1px solid rgba(255,255,255,0.1)" }}>
+                        <h3 style={{ fontSize: "1rem", fontWeight: 600, color: "rgba(255,255,255,0.6)", marginBottom: "28px", textAlign: "center", textTransform: "uppercase", letterSpacing: "2px" }}>Tools I Use</h3>
+                        <div style={{ display: "flex", flexWrap: "wrap", gap: "14px", justifyContent: "center" }}>
                             {tools.map((tool, i) => (
-                                <ToolIcon key={i} name={tool} color={i % 2 === 0 ? "#14b8a6" : "#ec4899"} />
+                                <div key={i} style={{ display: "flex", alignItems: "center", gap: "10px", padding: "12px 20px", background: "rgba(255,255,255,0.08)", borderRadius: "50px", transition: "all 0.3s" }}
+                                    onMouseEnter={(e) => { e.currentTarget.style.background = "#e91e8c"; e.currentTarget.style.transform = "translateY(-2px)"; const span = e.currentTarget.querySelector("span") as HTMLElement; if(span) span.style.color = "#fff"; }}
+                                    onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.08)"; e.currentTarget.style.transform = "translateY(0)"; const span = e.currentTarget.querySelector("span") as HTMLElement; if(span) span.style.color = "#fff"; }}>
+                                    {tool.logo ? (
+                                        <img src={tool.logo} alt={tool.name} style={{ width: "20px", height: "20px" }} />
+                                    ) : (
+                                        <div style={{ width: "20px", height: "20px", background: "#e91e8c", borderRadius: "4px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.6rem", fontWeight: 700, color: "#fff" }}>
+                                            {tool.name.charAt(0)}
+                                        </div>
+                                    )}
+                                    <span style={{ fontSize: "0.9rem", color: "#fff", fontWeight: 500, transition: "color 0.3s" }}>{tool.name}</span>
+                                </div>
                             ))}
                         </div>
                     </div>
                 </ScrollAnimate>
             </div>
 
-            <style jsx>{`@media (max-width: 768px) { .skills-grid { grid-template-columns: 1fr !important; } }`}</style>
+            <style jsx>{`@media (max-width: 900px) { .skills-grid { grid-template-columns: 1fr !important; } }`}</style>
         </section>
     );
 }
