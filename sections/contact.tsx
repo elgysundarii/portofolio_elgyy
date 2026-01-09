@@ -1,8 +1,16 @@
 "use client";
 
 import ScrollAnimate from "@/components/ScrollAnimate";
+import { useEffect, useState } from "react";
 
 export default function Contact() {
+    const [scrollY, setScrollY] = useState(0);
+
+    useEffect(() => {
+        const handleScroll = () => setScrollY(window.scrollY);
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
     const contacts = [
         { label: "Email", value: "elgysundariii@gmail.com", href: "mailto:elgysundariii@gmail.com" },
         { label: "Phone", value: "+62 831-3773-5798", href: "tel:+6283137735798" },
@@ -16,11 +24,30 @@ export default function Contact() {
     ];
 
     return (
-        <section id="contact" style={{ padding: "120px 60px", position: "relative", background: "#fff" }}>
+        <section id="contact" style={{ padding: "120px 60px", position: "relative", background: "#fff", overflow: "hidden" }}>
             
-            {/* Decorative */}
-            <div style={{ position: "absolute", top: "20%", right: "-5%", width: "300px", height: "300px", border: "40px solid rgba(30, 58, 95, 0.05)", borderRadius: "50%" }} />
-            <div style={{ position: "absolute", bottom: "15%", left: "-3%", width: "150px", height: "150px", border: "25px solid rgba(233, 30, 140, 0.08)", borderRadius: "50%" }} />
+            {/* Decorative with parallax */}
+            <div style={{ position: "absolute", top: "20%", right: "-5%", width: "300px", height: "300px", border: "40px solid rgba(30, 58, 95, 0.05)", borderRadius: "50%", transform: `translateY(${(scrollY - 2500) * 0.05}px)`, transition: "transform 0.1s ease-out" }} />
+            <div style={{ position: "absolute", bottom: "15%", left: "-3%", width: "150px", height: "150px", border: "25px solid rgba(233, 30, 140, 0.08)", borderRadius: "50%", transform: `translateY(${(scrollY - 2500) * -0.03}px)`, transition: "transform 0.1s ease-out" }} />
+            
+            {/* Floating hearts & sparkles */}
+            <div style={{ position: "absolute", top: "10%", left: "10%", fontSize: "2rem", opacity: 0.25, animation: "heartbeat 2s ease-in-out infinite" }}>💌</div>
+            <div style={{ position: "absolute", bottom: "25%", right: "12%", fontSize: "1.8rem", opacity: 0.2, animation: "heartbeat 2.5s ease-in-out infinite 0.3s" }}>💖</div>
+            <div style={{ position: "absolute", top: "40%", left: "5%", fontSize: "1.5rem", opacity: 0.15, animation: "sparkle 3s ease-in-out infinite" }}>✨</div>
+            <div style={{ position: "absolute", top: "60%", right: "8%", fontSize: "1.6rem", opacity: 0.2, animation: "sparkle 4s ease-in-out infinite 1s" }}>🌟</div>
+
+            <style jsx>{`
+                @keyframes heartbeat {
+                    0%, 100% { transform: scale(1); }
+                    25% { transform: scale(1.1); }
+                    50% { transform: scale(1); }
+                    75% { transform: scale(1.15); }
+                }
+                @keyframes sparkle {
+                    0%, 100% { opacity: 0.15; transform: scale(1) rotate(0deg); }
+                    50% { opacity: 0.4; transform: scale(1.2) rotate(10deg); }
+                }
+            `}</style>
 
             <div style={{ maxWidth: "800px", margin: "0 auto", position: "relative", zIndex: 1 }}>
                 

@@ -1,6 +1,16 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 export default function Navbar() {
+    const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => setScrolled(window.scrollY > 50);
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
     const navItems = [
         { label: "About Me", href: "#about" },
         { label: "Projects", href: "#projects" },
@@ -13,7 +23,21 @@ export default function Navbar() {
     };
 
     return (
-        <nav style={{ position: "fixed", top: "30px", left: 0, right: 0, zIndex: 100, padding: "0 60px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <nav style={{ 
+            position: "fixed", 
+            top: 0, 
+            left: 0, 
+            right: 0, 
+            zIndex: 100, 
+            padding: scrolled ? "15px 60px" : "25px 60px", 
+            display: "flex", 
+            justifyContent: "space-between", 
+            alignItems: "center",
+            background: scrolled ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.9)",
+            backdropFilter: "blur(10px)",
+            boxShadow: scrolled ? "0 4px 30px rgba(0,0,0,0.1)" : "0 2px 20px rgba(0,0,0,0.05)",
+            transition: "all 0.3s ease",
+        }}>
             
             {/* Left - Home button */}
             <a href="#hero" onClick={(e) => handleClick(e, "#hero")}

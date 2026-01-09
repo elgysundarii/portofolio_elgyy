@@ -2,14 +2,28 @@
 
 import ScrollAnimate from "@/components/ScrollAnimate";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function About() {
+    const [scrollY, setScrollY] = useState(0);
+
+    useEffect(() => {
+        const handleScroll = () => setScrollY(window.scrollY);
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
     return (
-        <section id="about" style={{ padding: "120px 60px", position: "relative", background: "#fff" }}>
+        <section id="about" style={{ padding: "120px 60px", position: "relative", background: "#fff", overflow: "hidden" }}>
             
-            {/* Decorative circle */}
-            <div style={{ position: "absolute", top: "10%", right: "-5%", width: "300px", height: "300px", border: "40px solid rgba(30, 58, 95, 0.05)", borderRadius: "50%" }} />
-            <div style={{ position: "absolute", bottom: "20%", left: "-3%", width: "150px", height: "150px", border: "25px solid rgba(233, 30, 140, 0.08)", borderRadius: "50%" }} />
+            {/* Decorative circle with animation */}
+            <div style={{ position: "absolute", top: "10%", right: "-5%", width: "300px", height: "300px", border: "40px solid rgba(30, 58, 95, 0.05)", borderRadius: "50%", transform: `translateY(${(scrollY - 500) * 0.1}px) rotate(${scrollY * 0.02}deg)`, transition: "transform 0.1s ease-out" }} />
+            <div style={{ position: "absolute", bottom: "20%", left: "-3%", width: "150px", height: "150px", border: "25px solid rgba(233, 30, 140, 0.08)", borderRadius: "50%", transform: `translateY(${(scrollY - 500) * -0.05}px)`, transition: "transform 0.1s ease-out" }} />
+            
+            {/* Floating emojis */}
+            <div style={{ position: "absolute", top: "15%", left: "10%", fontSize: "2rem", opacity: 0.3, animation: "float 4s ease-in-out infinite" }}>💖</div>
+            <div style={{ position: "absolute", bottom: "25%", right: "8%", fontSize: "1.8rem", opacity: 0.25, animation: "float 5s ease-in-out infinite 0.5s" }}>✨</div>
+            <div style={{ position: "absolute", top: "60%", left: "5%", fontSize: "1.5rem", opacity: 0.2, animation: "float 6s ease-in-out infinite 1s" }}>🌸</div>
 
             <div style={{ maxWidth: "1200px", margin: "0 auto", position: "relative", zIndex: 1 }}>
                 
@@ -24,8 +38,8 @@ export default function About() {
                                 </div>
                             </div>
                             
-                            {/* Floating badge */}
-                            <div style={{ position: "absolute", bottom: "-20px", right: "-20px", padding: "16px 28px", background: "#e91e8c", borderRadius: "50px", fontWeight: 600, color: "#fff", fontSize: "0.95rem", boxShadow: "0 8px 25px rgba(233, 30, 140, 0.3)" }}>
+                            {/* Floating badge with bounce */}
+                            <div style={{ position: "absolute", bottom: "-20px", right: "-20px", padding: "16px 28px", background: "linear-gradient(135deg, #e91e8c, #ff6b9d)", borderRadius: "50px", fontWeight: 600, color: "#fff", fontSize: "0.95rem", boxShadow: "0 8px 25px rgba(233, 30, 140, 0.3)", animation: "wiggle 3s ease-in-out infinite" }}>
                                 Open to Work ✨
                             </div>
                         </div>
@@ -73,7 +87,19 @@ export default function About() {
                 </div>
             </div>
 
-            <style jsx>{`@media (max-width: 900px) { .about-grid { grid-template-columns: 1fr !important; gap: 50px !important; } }`}</style>
+            <style jsx>{`
+                @keyframes float {
+                    0%, 100% { transform: translateY(0) rotate(0deg); }
+                    50% { transform: translateY(-15px) rotate(5deg); }
+                }
+                @keyframes wiggle {
+                    0%, 100% { transform: rotate(-2deg); }
+                    50% { transform: rotate(2deg); }
+                }
+                @media (max-width: 900px) { 
+                    .about-grid { grid-template-columns: 1fr !important; gap: 50px !important; } 
+                }
+            `}</style>
         </section>
     );
 }

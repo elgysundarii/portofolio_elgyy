@@ -1,6 +1,7 @@
 "use client";
 
 import ScrollAnimate from "@/components/ScrollAnimate";
+import { useEffect, useState } from "react";
 
 const projects = [
     { 
@@ -38,12 +39,32 @@ const projects = [
 ];
 
 export default function Projects() {
+    const [scrollY, setScrollY] = useState(0);
+
+    useEffect(() => {
+        const handleScroll = () => setScrollY(window.scrollY);
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
     return (
-        <section id="projects" style={{ padding: "120px 60px", position: "relative", background: "#fff" }}>
+        <section id="projects" style={{ padding: "120px 60px", position: "relative", background: "#fff", overflow: "hidden" }}>
             
-            {/* Decorative */}
-            <div style={{ position: "absolute", bottom: "10%", left: "-5%", width: "250px", height: "250px", border: "40px solid rgba(30, 58, 95, 0.05)", borderRadius: "50%" }} />
-            <div style={{ position: "absolute", top: "15%", right: "-3%", width: "150px", height: "150px", border: "25px solid rgba(233, 30, 140, 0.08)", borderRadius: "50%" }} />
+            {/* Decorative with parallax */}
+            <div style={{ position: "absolute", bottom: "10%", left: "-5%", width: "250px", height: "250px", border: "40px solid rgba(30, 58, 95, 0.05)", borderRadius: "50%", transform: `translateY(${(scrollY - 1500) * 0.06}px) rotate(${scrollY * 0.01}deg)`, transition: "transform 0.1s ease-out" }} />
+            <div style={{ position: "absolute", top: "15%", right: "-3%", width: "150px", height: "150px", border: "25px solid rgba(233, 30, 140, 0.08)", borderRadius: "50%", transform: `translateY(${(scrollY - 1500) * -0.04}px)`, transition: "transform 0.1s ease-out" }} />
+            
+            {/* Floating elements */}
+            <div style={{ position: "absolute", top: "8%", left: "12%", fontSize: "2rem", opacity: 0.2, animation: "float 5s ease-in-out infinite" }}>💼</div>
+            <div style={{ position: "absolute", bottom: "20%", right: "15%", fontSize: "1.8rem", opacity: 0.2, animation: "float 4s ease-in-out infinite 0.5s" }}>🎨</div>
+            <div style={{ position: "absolute", top: "45%", left: "5%", fontSize: "1.5rem", opacity: 0.15, animation: "float 6s ease-in-out infinite 1s" }}>💡</div>
+
+            <style jsx>{`
+                @keyframes float {
+                    0%, 100% { transform: translateY(0) rotate(0deg); }
+                    50% { transform: translateY(-12px) rotate(3deg); }
+                }
+            `}</style>
 
             <div style={{ maxWidth: "1200px", margin: "0 auto", position: "relative", zIndex: 1 }}>
                 

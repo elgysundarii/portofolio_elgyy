@@ -1,6 +1,7 @@
 "use client";
 
 import ScrollAnimate from "@/components/ScrollAnimate";
+import { useEffect, useState } from "react";
 
 const tools = [
     { name: "Figma", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
@@ -27,12 +28,41 @@ const skills = [
 ];
 
 export default function Skills() {
+    const [scrollY, setScrollY] = useState(0);
+
+    useEffect(() => {
+        const handleScroll = () => setScrollY(window.scrollY);
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
     return (
-        <section id="skills" style={{ padding: "120px 60px", position: "relative", background: "#1e3a5f" }}>
+        <section id="skills" style={{ padding: "120px 60px", position: "relative", background: "#1e3a5f", overflow: "hidden" }}>
             
-            {/* Decorative */}
-            <div style={{ position: "absolute", top: "20%", right: "5%", width: "200px", height: "200px", border: "30px solid rgba(255,255,255,0.05)", borderRadius: "50%" }} />
-            <div style={{ position: "absolute", bottom: "15%", left: "8%", width: "120px", height: "120px", border: "20px solid rgba(233, 30, 140, 0.1)", borderRadius: "50%" }} />
+            {/* Decorative with parallax */}
+            <div style={{ position: "absolute", top: "20%", right: "5%", width: "200px", height: "200px", border: "30px solid rgba(255,255,255,0.05)", borderRadius: "50%", transform: `translateY(${(scrollY - 1000) * 0.08}px) rotate(${scrollY * 0.015}deg)`, transition: "transform 0.1s ease-out", animation: "spin 20s linear infinite" }} />
+            <div style={{ position: "absolute", bottom: "15%", left: "8%", width: "120px", height: "120px", border: "20px solid rgba(233, 30, 140, 0.1)", borderRadius: "50%", transform: `translateY(${(scrollY - 1000) * -0.05}px)`, transition: "transform 0.1s ease-out", animation: "pulse 4s ease-in-out infinite" }} />
+            
+            {/* Floating sparkles */}
+            <div style={{ position: "absolute", top: "10%", left: "15%", fontSize: "2rem", opacity: 0.3, animation: "twinkle 3s ease-in-out infinite" }}>⭐</div>
+            <div style={{ position: "absolute", bottom: "30%", right: "10%", fontSize: "1.8rem", opacity: 0.25, animation: "twinkle 4s ease-in-out infinite 0.5s" }}>✨</div>
+            <div style={{ position: "absolute", top: "50%", left: "3%", fontSize: "1.5rem", opacity: 0.2, animation: "twinkle 5s ease-in-out infinite 1s" }}>💫</div>
+            <div style={{ position: "absolute", top: "70%", right: "20%", fontSize: "1.6rem", opacity: 0.25, animation: "twinkle 3.5s ease-in-out infinite 1.5s" }}>🌟</div>
+
+            <style jsx>{`
+                @keyframes twinkle {
+                    0%, 100% { opacity: 0.2; transform: scale(1); }
+                    50% { opacity: 0.5; transform: scale(1.2); }
+                }
+                @keyframes spin {
+                    from { transform: rotate(0deg); }
+                    to { transform: rotate(360deg); }
+                }
+                @keyframes pulse {
+                    0%, 100% { transform: scale(1); }
+                    50% { transform: scale(1.05); }
+                }
+            `}</style>
 
             <div style={{ maxWidth: "1200px", margin: "0 auto", position: "relative", zIndex: 1 }}>
                 
