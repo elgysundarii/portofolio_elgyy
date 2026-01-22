@@ -3,18 +3,18 @@
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 
-// Floating items dengan posisi random - fun animals!
+// Simple elegant floating items 
 const floatingItems = [
-    { text: "🐒", size: "2.2rem", color: "#8B4513" },
-    { text: "🐣", size: "2rem", color: "#FFD700" },
-    { text: "🦥", size: "2rem", color: "#8B7355" },
-    { text: "🐥", size: "1.8rem", color: "#FFD700" },
-    { text: "🐵", size: "1.9rem", color: "#8B4513" },
-    { text: "🐤", size: "1.7rem", color: "#FFD700" },
-    { text: "🦧", size: "2.1rem", color: "#CD853F" },
     { text: "✨", size: "1.5rem", color: "#FFD700" },
-    { text: "🐣", size: "1.8rem", color: "#FFD700" },
-    { text: "🐒", size: "1.9rem", color: "#8B4513" },
+    { text: "🌸", size: "1.8rem", color: "#FFD700" },
+    { text: "🦋", size: "1.2rem", color: "#FFD700" },
+    { text: "✨", size: "1.4rem", color: "#FFD700" },
+    { text: "🌸", size: "1.6rem", color: "#FFD700" },
+    { text: "🦋", size: "1.3rem", color: "#FFD700" },
+    { text: "✨", size: "1.5rem", color: "#FFD700" },
+    { text: "🌸", size: "1.7rem", color: "#FFD700" },
+    { text: "🦋", size: "1.4rem", color: "#FFD700" },
+    { text: "✨", size: "1.6rem", color: "#FFD700" },
 ];
 
 export default function Hero() {
@@ -53,39 +53,14 @@ export default function Hero() {
             {/* Curved white shape with parallax */}
             <div style={{ position: "absolute", top: 0, left: "25%", right: 0, bottom: 0, background: "#fff", borderRadius: "0 0 0 50%", transform: `scaleX(1.5) ${parallax(-0.1)}`, transformOrigin: "right" }} />
             
-            {/* Decorative circles - scattered with bounce animation */}
-            <div style={{ position: "absolute", top: "12%", right: "8%", width: "120px", height: "120px", border: "18px solid rgba(233, 30, 140, 0.3)", borderRadius: "50%", animation: "float 4s ease-in-out infinite", transform: parallax(-0.2) }} />
-            <div style={{ position: "absolute", bottom: "25%", left: "3%", width: "90px", height: "90px", border: "12px solid rgba(255,255,255,0.2)", borderRadius: "50%", animation: "float 5s ease-in-out infinite 0.5s", transform: parallax(-0.15) }} />
-            <div style={{ position: "absolute", top: "60%", left: "6%", width: "50px", height: "50px", background: "#e91e8c", borderRadius: "50%", opacity: 0.4, animation: "pulse 3s ease-in-out infinite", transform: parallax(-0.25) }} />
-            <div style={{ position: "absolute", top: "20%", right: "25%", width: "70px", height: "70px", background: "rgba(255,255,255,0.15)", borderRadius: "50%", animation: "float 6s ease-in-out infinite 1s", transform: parallax(-0.1) }} />
-            <div style={{ position: "absolute", bottom: "15%", right: "12%", width: "60px", height: "60px", border: "10px solid rgba(233, 30, 140, 0.2)", borderRadius: "50%", animation: "spin 8s linear infinite", transform: parallax(-0.3) }} />
-            
-            {/* Fun animal shapes floating */}
-            <div style={{ position: "absolute", top: "30%", left: "15%", fontSize: "3rem", opacity: 0.4, animation: "swing 3s ease-in-out infinite", transformOrigin: "top center", transform: parallax(-0.2) }}>🐒</div>
-            <div style={{ position: "absolute", top: "70%", right: "20%", fontSize: "2.5rem", opacity: 0.35, animation: "hatch 2s ease-in-out infinite", transform: parallax(-0.15) }}>🐣</div>
-            <div style={{ position: "absolute", top: "15%", left: "40%", fontSize: "2.2rem", opacity: 0.3, animation: "swing 4s ease-in-out infinite 0.5s", transformOrigin: "top center", transform: parallax(-0.1) }}>🦥</div>
+            {/* Decorative shapes - more subtle and organized */}
+            <div style={{ position: "absolute", top: "10%", right: "10%", width: "300px", height: "300px", background: "rgba(233, 30, 140, 0.05)", borderRadius: "50%", filter: "blur(40px)", transform: parallax(-0.1) }} />
+            <div style={{ position: "absolute", bottom: "10%", left: "5%", width: "250px", height: "250px", background: "rgba(255, 255, 255, 0.05)", borderRadius: "50%", filter: "blur(30px)", transform: parallax(-0.15) }} />
 
-            {/* Random floating cute items */}
-            {mounted && randomPositions.map((pos, i) => (
-                <div 
-                    key={i}
-                    style={{ 
-                        position: "absolute", 
-                        top: pos.top, 
-                        left: pos.left, 
-                        fontSize: floatingItems[i].size, 
-                        opacity: 0.6 + Math.random() * 0.3,
-                        animation: `wiggle ${3 + Math.random() * 2}s ease-in-out infinite ${pos.delay}s`,
-                        transform: `${parallax(-0.1 - Math.random() * 0.2)} rotate(${pos.rotation}deg)`,
-                        zIndex: 5,
-                        pointerEvents: "none",
-                    }}
-                >
-                    {floatingItems[i].text}
-                </div>
-            ))}
+            {/* Elegant floating items - very low opacity */}
+            <div style={{ position: "absolute", top: "25%", left: "10%", fontSize: "1.5rem", opacity: 0.1, animation: "floatSlow 8s ease-in-out infinite", transform: parallax(-0.1) }}>✨</div>
+            <div style={{ position: "absolute", bottom: "20%", right: "8%", fontSize: "1.8rem", opacity: 0.1, animation: "floatSlow 10s ease-in-out infinite 1s", transform: parallax(-0.12) }}>🌸</div>
 
-            {/* Content */}
             <div style={{ position: "relative", zIndex: 10, minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", padding: "0 60px", maxWidth: "1700px", margin: "0 auto" }}>
                 
                 {/* Left Side - Name combined */}
@@ -116,13 +91,13 @@ export default function Hero() {
                     </div>
                 </div>
 
-                {/* Center - Photo with hover effect - NOW COLORFUL & BIGGER */}
+                {/* Center - Photo with hover effect */}
                 <div style={{ position: "absolute", left: "50%", bottom: 0, transform: `translateX(-50%) ${parallax(-0.02)}`, zIndex: 15, opacity: mounted ? 1 : 0, transition: "opacity 1s ease-out 0.3s" }}>
                     <div style={{ position: "relative", width: "clamp(480px, 50vw, 750px)", height: "clamp(580px, 80vh, 900px)" }}>
-                        {/* White outline with glow - smaller than photo */}
+                        {/* White outline with glow */}
                         <div style={{ position: "absolute", inset: "5% -10px -0px -10px", background: "#fff", borderRadius: "50% 50% 0 0", boxShadow: "0 0 80px rgba(233, 30, 140, 0.25)" }} />
                         <Image 
-                            src="/elgy-cutout.png" 
+                            src="/elgyhero.png" 
                             alt="Elgy Sundari" 
                             fill 
                             style={{ objectFit: "contain", objectPosition: "center bottom" }} 
@@ -172,43 +147,21 @@ export default function Hero() {
                     0%, 100% { transform: translateY(0); }
                     50% { transform: translateY(-20px); }
                 }
+                @keyframes floatSlow {
+                    0%, 100% { transform: translateY(0) rotate(0deg); }
+                    50% { transform: translateY(-30px) rotate(10deg); }
+                }
                 @keyframes wiggle {
                     0%, 100% { transform: rotate(-3deg); }
                     50% { transform: rotate(3deg); }
-                }
-                @keyframes pulse {
-                    0%, 100% { transform: scale(1); opacity: 0.4; }
-                    50% { transform: scale(1.1); opacity: 0.6; }
                 }
                 @keyframes spin {
                     from { transform: rotate(0deg); }
                     to { transform: rotate(360deg); }
                 }
-                @keyframes swing {
-                    0%, 100% { transform: rotate(-15deg); }
-                    50% { transform: rotate(15deg); }
-                }
-                @keyframes hatch {
-                    0%, 100% { transform: scale(1) rotate(0deg); }
-                    25% { transform: scale(1.1) rotate(-5deg); }
-                    50% { transform: scale(1) rotate(0deg); }
-                    75% { transform: scale(1.1) rotate(5deg); }
-                }
-                @keyframes blobPulse {
-                    0%, 100% { transform: rotate(-3deg) scale(1); }
-                    50% { transform: rotate(-3deg) scale(1.02); }
-                }
-                @keyframes sparkle {
-                    0%, 100% { opacity: 1; transform: scale(1); }
-                    50% { opacity: 0.5; transform: scale(0.8); }
-                }
-                @keyframes bounce {
-                    0%, 100% { transform: rotate(3deg) translateY(0); }
-                    50% { transform: rotate(3deg) translateY(-8px); }
-                }
-                @keyframes glow {
-                    0%, 100% { box-shadow: 0 6px 25px rgba(233, 30, 140, 0.4); }
-                    50% { box-shadow: 0 6px 35px rgba(233, 30, 140, 0.6); }
+                @keyframes pulse {
+                    0%, 100% { transform: scale(1); opacity: 0.4; }
+                    50% { transform: scale(1.1); opacity: 0.6; }
                 }
                 @keyframes scrollBounce {
                     0%, 100% { transform: translateX(-50%) translateY(0); }
@@ -218,3 +171,4 @@ export default function Hero() {
         </section>
     );
 }
+
